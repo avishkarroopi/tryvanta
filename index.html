@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRYVANTA — Artificial Intelligence | Robotics | Future</title>
+<meta name="description" content="Tryvanta is building Physical Intelligence — AI systems that understand, reason, learn, and act in the real world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#010204;
+  --dark:#05080f;
+  --deep:#0a1020;
+  --blue:#1565ff;
+  --blue2:#2979ff;
+  --blue3:#5c9aff;
+  --cyan:#00d4ff;
+  --silver:#9aaabf;
+  --silver2:#c8d4e8;
+  --white:#eef2ff;
+  --glass:rgba(255,255,255,0.025);
+  --gb:rgba(255,255,255,0.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--blue);color:#fff}
+::-webkit-scrollbar{width:1px}
+::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* NAV */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  padding:22px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .5s cubic-bezier(.4,0,.2,1);
+}
+#nav.solid{
+  background:rgba(1,2,4,.9);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  padding:14px 64px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto;filter:drop-shadow(0 0 8px rgba(21,101,255,.5))}
+.nav-logo-text{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;letter-spacing:4px;color:var(--white)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{
+  color:var(--silver);text-decoration:none;
+  font-size:12px;font-weight:400;letter-spacing:2px;text-transform:uppercase;
+  transition:color .3s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--blue2);transition:width .3s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;gap:10px;align-items:center}
+.n-btn{
+  color:var(--silver2);text-decoration:none;
+  padding:9px 20px;border:1px solid rgba(255,255,255,.08);
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  transition:all .3s;font-family:'Inter',sans-serif;
+}
+.n-btn:hover{border-color:var(--blue2);color:var(--white)}
+.n-btn-fill{
+  background:var(--blue);color:#fff;
+  text-decoration:none;padding:9px 22px;
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  transition:all .3s;font-family:'Inter',sans-serif;
+  position:relative;overflow:hidden;
+}
+.n-btn-fill:hover{background:var(--blue2);box-shadow:0 0 28px rgba(21,101,255,.5)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.ham span{width:22px;height:1px;background:var(--silver2);display:block;transition:all .3s}
+
+/* HERO */
+#hero{
+  position:relative;height:100vh;min-height:720px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-vgradient{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%,rgba(21,101,255,.13) 0%,transparent 65%),
+    radial-gradient(ellipse 100% 40% at 50% 100%,rgba(1,2,4,.95) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 10% 20%,rgba(0,212,255,.04) 0%,transparent 50%);
+}
+.hero-content{
+  position:relative;z-index:10;
+  text-align:center;max-width:1000px;padding:0 32px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(21,101,255,.3);
+  background:rgba(21,101,255,.07);
+  padding:7px 20px;border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:3px;color:var(--blue3);margin-bottom:44px;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-dot{width:5px;height:5px;background:var(--blue3);border-radius:50%;animation:pulse 1.8s infinite}
+.hero-h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(52px,8vw,108px);
+  font-weight:700;line-height:.95;letter-spacing:-2px;
+  margin-bottom:32px;animation:fadeUp .8s .2s ease both;
+}
+.hero-h1 .line1{display:block;color:var(--white)}
+.hero-h1 .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--white) 0%,var(--blue2) 40%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  padding-bottom:8px;
+}
+.hero-sub{
+  font-size:clamp(16px,1.8vw,19px);font-weight:300;color:var(--silver);
+  max-width:600px;margin:0 auto 52px;line-height:1.75;
+  animation:fadeUp .8s .35s ease both;
+}
+.hero-ctas{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .8s .5s ease both;
+}
+.hcta-p{
+  background:var(--blue);color:#fff;text-decoration:none;
+  padding:16px 40px;font-size:12px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:all .3s;font-family:'Inter',sans-serif;
+  position:relative;overflow:hidden;
+}
+.hcta-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:.3s}
+.hcta-p:hover{background:var(--blue2);box-shadow:0 0 48px rgba(21,101,255,.6);transform:translateY(-1px)}
+.hcta-p:hover::before{opacity:1}
+.hcta-o{
+  border:1px solid rgba(255,255,255,.15);color:var(--silver2);text-decoration:none;
+  padding:16px 40px;font-size:12px;font-weight:400;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:all .3s;font-family:'Inter',sans-serif;
+}
+.hcta-o:hover{border-color:var(--blue2);color:var(--white);transform:translateY(-1px)}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--silver);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  opacity:.5;animation:fadeIn 1.5s 1.2s ease both;
+}
+.scroll-bar{width:1px;height:44px;background:linear-gradient(to bottom,var(--blue2),transparent);animation:scrollAnim 2s infinite}
+
+/* METRICS */
+.metrics{
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  padding:36px 64px;
+  display:flex;justify-content:space-around;flex-wrap:wrap;gap:32px;
+}
+.metric-item{text-align:center}
+.metric-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:38px;font-weight:700;color:var(--white);display:block;line-height:1;
+}
+.metric-num b{color:var(--blue2);font-weight:700}
+.metric-lbl{font-size:10px;letter-spacing:2.5px;color:var(--silver);text-transform:uppercase;margin-top:8px;display:block}
+
+/* COMMON SECTION */
+section{padding:130px 64px}
+.s-label{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:4px;color:var(--blue3);text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:14px;
+}
+.s-label::before{content:'';width:28px;height:1px;background:var(--blue2);flex-shrink:0}
+.s-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(34px,4.5vw,64px);
+  font-weight:700;line-height:1.05;letter-spacing:-.5px;margin-bottom:20px;
+}
+.s-sub{font-size:17px;font-weight:300;color:var(--silver);line-height:1.85;max-width:580px}
+.reveal{opacity:0;transform:translateY(32px);transition:all .9s cubic-bezier(.4,0,.2,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:all .9s cubic-bezier(.4,0,.2,1)}
+.reveal-left.vis{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:all .9s cubic-bezier(.4,0,.2,1)}
+.reveal-right.vis{opacity:1;transform:translateX(0)}
+
+/* BUILD */
+#build{background:var(--dark)}
+.build-intro{max-width:800px;margin-bottom:72px}
+.build-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.04);
+}
+.bc{
+  background:var(--black);padding:48px 40px;
+  position:relative;overflow:hidden;transition:all .4s;cursor:default;
+}
+.bc::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 50% 120%,rgba(21,101,255,.09),transparent);
+  opacity:0;transition:.4s;
+}
+.bc:hover{background:var(--deep)}
+.bc:hover::before{opacity:1}
+.bc-icon{margin-bottom:28px;width:44px;height:44px}
+.bc-num{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:2px;color:var(--blue3);margin-bottom:16px;opacity:.5;
+}
+.bc h3{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;margin-bottom:10px;color:var(--white)}
+.bc p{font-size:13px;color:var(--silver);line-height:1.75}
+.bc-arr{
+  position:absolute;right:28px;bottom:28px;
+  color:var(--blue2);opacity:0;transition:all .3s;font-size:18px;
+}
+.bc:hover .bc-arr{opacity:1;transform:translate(3px,-3px)}
+
+/* GENESIS PRODUCT */
+#genesis{background:var(--black);overflow:hidden;position:relative}
+#genesis::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(21,101,255,.1),transparent);
+  pointer-events:none;
+}
+.genesis-wrap{max-width:1400px;margin:0 auto}
+.genesis-header{text-align:center;margin-bottom:80px}
+.genesis-header .s-label{justify-content:center}
+.genesis-product-name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(60px,8vw,110px);
+  font-weight:700;letter-spacing:-3px;line-height:1;
+  background:linear-gradient(135deg,var(--white) 0%,var(--blue2) 50%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:12px;
+}
+.genesis-tag{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;
+  color:var(--silver);text-transform:uppercase;margin-bottom:20px;display:block;
+}
+.genesis-sub{font-size:18px;color:var(--silver);max-width:620px;margin:0 auto;line-height:1.8;font-weight:300}
+.genesis-visual{
+  position:relative;height:420px;
+  background:var(--deep);
+  border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;margin-bottom:2px;
+  display:flex;align-items:center;justify-content:center;
+}
+#genesis-canvas{width:100%;height:100%;position:absolute;inset:0}
+.genesis-overlay-text{
+  position:relative;z-index:2;text-align:center;
+}
+.genesis-visual-label{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:4px;color:var(--blue3);text-transform:uppercase;margin-bottom:8px;
+}
+.genesis-caps-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;
+}
+.gcap{
+  background:var(--deep);border:1px solid rgba(255,255,255,.04);
+  padding:32px 28px;transition:all .3s;
+}
+.gcap:hover{background:rgba(21,101,255,.07);border-color:rgba(21,101,255,.2)}
+.gcap-icon{margin-bottom:16px}
+.gcap h4{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:8px}
+.gcap p{font-size:13px;color:var(--silver);line-height:1.65}
+
+/* INTELLIGENCE */
+#intelligence{background:var(--dark)}
+.intel-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:72px}
+.intel-canvas-wrap{
+  position:relative;height:520px;
+  border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;background:var(--deep);
+}
+#intel-canvas{width:100%;height:100%}
+.intel-items{display:flex;flex-direction:column;gap:0}
+.ii{
+  padding:24px 0;border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;gap:20px;align-items:flex-start;transition:all .3s;cursor:default;
+}
+.ii:first-child{border-top:1px solid rgba(255,255,255,.05)}
+.ii:hover{padding-left:8px}
+.ii-icon{
+  width:38px;height:38px;min-width:38px;
+  background:rgba(21,101,255,.08);
+  border:1px solid rgba(21,101,255,.15);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.ii h4{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:6px}
+.ii p{font-size:13px;color:var(--silver);line-height:1.65}
+
+/* ROBOTICS */
+#robotics{background:var(--black);overflow:hidden;position:relative}
+.robotics-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(21,101,255,.07),transparent);
+}
+.robotics-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.robotics-visual{
+  position:relative;height:600px;
+  border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;background:var(--deep);
+  display:flex;align-items:center;justify-content:center;
+}
+#robotics-canvas{width:100%;height:100%;position:absolute;inset:0}
+.robotics-content{}
+.r-pillars{display:flex;flex-direction:column;gap:2px;margin-top:40px}
+.rp{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  padding:22px 24px;display:flex;gap:16px;align-items:flex-start;
+  transition:all .3s;
+}
+.rp:hover{background:rgba(21,101,255,.06);border-color:rgba(21,101,255,.2);padding-left:30px}
+.rp-icon{width:32px;height:32px;min-width:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rp h4{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;margin-bottom:4px}
+.rp p{font-size:12px;color:var(--silver);line-height:1.6}
+
+/* ECOSYSTEM */
+#ecosystem{background:var(--dark)}
+.eco-diagram{
+  margin-top:80px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+  max-width:700px;margin-left:auto;margin-right:auto;
+}
+.eco-node{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  padding:22px 48px;text-align:center;width:100%;
+  position:relative;transition:all .4s;
+}
+.eco-node:hover{border-color:rgba(21,101,255,.3);background:rgba(21,101,255,.06)}
+.eco-node h4{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:4px}
+.eco-node p{font-size:12px;color:var(--silver)}
+.eco-connector{
+  display:flex;flex-direction:column;align-items:center;
+  height:44px;justify-content:center;position:relative;
+}
+.eco-line{width:1px;flex:1;background:linear-gradient(to bottom,var(--blue),rgba(21,101,255,.1))}
+.eco-arr{color:var(--blue2);font-size:10px;letter-spacing:1px;margin-top:2px}
+.eco-node.highlight{
+  background:rgba(21,101,255,.12);border-color:rgba(21,101,255,.4);
+}
+.eco-node.highlight h4{color:var(--blue3)}
+
+/* RESEARCH */
+#research{background:var(--black)}
+.research-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.rc{
+  background:var(--dark);border:1px solid rgba(255,255,255,.05);
+  padding:36px;transition:all .4s;position:relative;overflow:hidden;
+}
+.rc::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:0;transition:.4s;
+}
+.rc:hover{border-color:rgba(21,101,255,.2);transform:translateY(-4px)}
+.rc:hover::after{opacity:1}
+.rc-tag{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:2.5px;color:var(--blue3);text-transform:uppercase;margin-bottom:16px;
+}
+.rc h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:12px;line-height:1.3}
+.rc p{font-size:13px;color:var(--silver);line-height:1.7;margin-bottom:20px}
+.rc-link{
+  color:var(--blue2);text-decoration:none;font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;transition:gap .3s;
+  font-family:'Space Mono',monospace;
+}
+.rc-link:hover{gap:12px}
+
+/* FOUNDER */
+#founder{background:var(--dark)}
+.founder-grid{display:grid;grid-template-columns:5fr 7fr;gap:100px;align-items:start}
+.founder-img-frame{
+  position:relative;
+  aspect-ratio:3/4;
+  background:var(--deep);
+  border:1px solid rgba(255,255,255,.06);
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.founder-img-frame::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,rgba(21,101,255,.15) 100%);
+  z-index:1;
+}
+.founder-placeholder-icon{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  color:rgba(255,255,255,.1);
+}
+.founder-placeholder-icon svg{width:64px;height:64px;opacity:.3}
+.founder-placeholder-icon span{font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:'Space Mono',monospace}
+.founder-badge{
+  position:absolute;bottom:-1px;left:0;right:0;z-index:2;
+  background:rgba(1,2,4,.95);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:18px 24px;
+}
+.founder-badge-name{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700}
+.founder-badge-role{font-size:10px;letter-spacing:2px;color:var(--blue3);text-transform:uppercase;margin-top:3px}
+.founder-content{}
+.founder-quote{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(22px,2.5vw,30px);
+  font-weight:500;line-height:1.4;color:var(--white);
+  margin:28px 0;padding-left:24px;
+  border-left:2px solid var(--blue);
+  font-style:normal;
+}
+.founder-story{font-size:15px;color:var(--silver);line-height:1.9;margin-bottom:20px}
+.founder-timeline{margin:44px 0;display:flex;flex-direction:column}
+.ft{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ft:first-child{border-top:1px solid rgba(255,255,255,.04)}
+.ft-yr{
+  font-family:'Space Mono',monospace;font-size:10px;
+  color:var(--blue3);letter-spacing:2px;min-width:56px;padding-top:3px;
+}
+.ft-text{font-size:14px;color:var(--silver);line-height:1.65}
+.ft-text strong{color:var(--white);font-weight:500}
+.btn-li{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(21,101,255,.35);color:var(--blue3);
+  text-decoration:none;padding:12px 24px;
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  transition:all .3s;font-family:'Inter',sans-serif;
+}
+.btn-li:hover{background:rgba(21,101,255,.1);border-color:var(--blue2)}
+
+/* WHY */
+#why{background:var(--black)}
+.why-header{text-align:center;max-width:700px;margin:0 auto 80px}
+.why-header .s-label{justify-content:center}
+.why-cmp{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;align-items:start}
+.why-col h3{
+  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;
+  margin-bottom:24px;color:var(--silver);letter-spacing:1px;text-transform:uppercase;
+}
+.why-col.tryvanta h3{color:var(--blue3)}
+.wi{
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  font-size:14px;color:var(--silver);display:flex;align-items:center;gap:12px;
+}
+.wi svg{flex-shrink:0;opacity:.5}
+.wi.tq{color:var(--white)}
+.wi.tq svg{opacity:1}
+.why-vs{
+  display:flex;align-items:center;justify-content:center;padding-top:52px;
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:4px;color:var(--silver);
+}
+
+/* ROADMAP */
+#roadmap{background:var(--dark);overflow:hidden}
+.roadmap-track{
+  display:flex;gap:0;margin-top:72px;
+  overflow-x:auto;scrollbar-width:none;
+}
+.roadmap-track::-webkit-scrollbar{display:none}
+.phase{
+  flex:1;min-width:180px;padding:40px 28px;
+  border-right:1px solid rgba(255,255,255,.04);
+  position:relative;transition:all .4s;overflow:hidden;
+}
+.phase:last-child{border-right:none}
+.phase::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+  transform:scaleX(0);transform-origin:left;transition:.5s;
+}
+.phase:hover{background:rgba(21,101,255,.04)}
+.phase:hover::after{transform:scaleX(1)}
+.phase-yr{
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:var(--blue3);margin-bottom:20px;display:block;
+}
+.phase h3{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:10px}
+.phase p{font-size:12px;color:var(--silver);line-height:1.65}
+
+/* CAREERS */
+#careers{background:var(--black)}
+.careers-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.career-vals{display:flex;flex-direction:column;gap:2px;margin-top:44px}
+.cv{
+  background:var(--dark);border:1px solid rgba(255,255,255,.04);
+  padding:24px 28px;display:flex;gap:16px;transition:all .3s;
+}
+.cv:hover{border-color:rgba(21,101,255,.2);background:rgba(21,101,255,.04)}
+.cv-icon{width:36px;height:36px;min-width:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cv h4{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:5px}
+.cv p{font-size:13px;color:var(--silver);line-height:1.6}
+.career-right{display:flex;flex-direction:column;justify-content:center;gap:28px;padding-top:20px}
+.career-big{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(40px,5vw,64px);font-weight:700;line-height:1.05;
+}
+.career-big span{color:var(--blue2)}
+.career-note{font-size:15px;color:var(--silver);line-height:1.85}
+.btn-careers{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--blue);color:#fff;text-decoration:none;
+  padding:15px 36px;font-size:12px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;transition:all .3s;
+  align-self:flex-start;font-family:'Inter',sans-serif;
+}
+.btn-careers:hover{background:var(--blue2);box-shadow:0 0 36px rgba(21,101,255,.5)}
+
+/* INVESTOR */
+#investor{background:var(--dark)}
+.inv-wrap{
+  background:linear-gradient(135deg,var(--deep) 0%,rgba(21,101,255,.06) 100%);
+  border:1px solid rgba(21,101,255,.12);
+  padding:100px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.inv-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 100%,rgba(21,101,255,.1),transparent);
+}
+.inv-wrap>*{position:relative;z-index:1}
+.inv-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.05;margin-bottom:20px}
+.inv-sub{font-size:17px;color:var(--silver);max-width:580px;margin:0 auto 60px;line-height:1.85;font-weight:300}
+.inv-metrics{
+  display:flex;justify-content:center;gap:80px;flex-wrap:wrap;
+  padding:48px 0;margin:0 0 60px;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.im h4{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:var(--blue2);margin-bottom:8px}
+.im p{font-size:10px;letter-spacing:2.5px;color:var(--silver);text-transform:uppercase}
+.btn-inv{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(21,101,255,.35);color:var(--blue3);
+  text-decoration:none;padding:15px 44px;font-size:12px;
+  letter-spacing:2px;text-transform:uppercase;transition:all .3s;
+  font-family:'Inter',sans-serif;
+}
+.btn-inv:hover{background:rgba(21,101,255,.12);border-color:var(--blue2)}
+
+/* SOCIAL PROOF */
+#press{background:var(--black)}
+.press-logos{
+  display:flex;gap:0;flex-wrap:wrap;margin-top:56px;
+  border:1px solid rgba(255,255,255,.04);
+}
+.press-item{
+  flex:1;min-width:160px;padding:32px 24px;
+  border-right:1px solid rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.press-item:last-child{border-right:none}
+.press-item:hover{background:rgba(255,255,255,.02)}
+.press-placeholder{
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:rgba(255,255,255,.15);text-transform:uppercase;
+  text-align:center;
+}
+
+/* CONTACT */
+#contact{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:72px}
+.c-info{display:flex;flex-direction:column;gap:28px}
+.ci{display:flex;gap:16px;align-items:flex-start}
+.ci-icon{
+  width:40px;height:40px;min-width:40px;
+  border:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.ci h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--blue3);text-transform:uppercase;margin-bottom:5px}
+.ci p,.ci a{font-size:15px;color:var(--silver);text-decoration:none;transition:color .3s}
+.ci a:hover{color:var(--white)}
+.c-form{display:flex;flex-direction:column;gap:14px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--silver);text-transform:uppercase}
+.fg input,.fg textarea,.fg select{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  color:var(--white);padding:14px 16px;
+  font-size:14px;font-family:'Inter',sans-serif;font-weight:300;
+  outline:none;transition:border-color .3s;resize:vertical;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--blue)}
+.fg select option{background:var(--dark)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-sub{
+  background:var(--blue);color:#fff;border:none;
+  padding:15px 32px;font-size:12px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .3s;margin-top:4px;
+}
+.btn-sub:hover{background:var(--blue2);box-shadow:0 0 32px rgba(21,101,255,.4)}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,.04);
+  padding:72px 64px 32px;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;margin-bottom:64px}
+.fb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:16px}
+.fb-logo img{height:32px;filter:drop-shadow(0 0 6px rgba(21,101,255,.4))}
+.fb-logo span{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;letter-spacing:3px;color:var(--white)}
+.fb p{font-size:13px;color:var(--silver);line-height:1.8;max-width:280px;margin-bottom:24px}
+.socials{display:flex;gap:10px}
+.sl{
+  width:34px;height:34px;border:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--silver);text-decoration:none;font-size:12px;
+  transition:all .3s;font-family:'Space Mono',monospace;
+}
+.sl:hover{border-color:var(--blue2);color:var(--blue2)}
+.fc h4{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--white);margin-bottom:20px;letter-spacing:1px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.fc ul li a{color:var(--silver);text-decoration:none;font-size:13px;transition:color .3s}
+.fc ul li a:hover{color:var(--white)}
+.footer-bot{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  padding-top:32px;border-top:1px solid rgba(255,255,255,.04);
+  font-size:11px;color:rgba(255,255,255,.2);letter-spacing:1px;
+}
+
+/* FLOATING */
+.floaters{position:fixed;bottom:28px;right:28px;display:flex;flex-direction:column;gap:12px;z-index:8000}
+.fl-btn{
+  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,.4);
+  position:relative;
+}
+.fl-btn::before{
+  content:attr(data-t);position:absolute;right:64px;
+  background:var(--dark);border:1px solid rgba(255,255,255,.07);
+  color:var(--white);font-size:11px;letter-spacing:1px;
+  padding:6px 12px;white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .3s;font-family:'Inter',sans-serif;
+}
+.fl-btn:hover::before{opacity:1}
+.fl-wa{background:#25D366}
+.fl-wa:hover{transform:scale(1.1);box-shadow:0 4px 28px rgba(37,211,102,.5)}
+.fl-call{background:var(--blue)}
+.fl-call:hover{transform:scale(1.1);box-shadow:0 4px 28px rgba(21,101,255,.5)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+@keyframes scrollAnim{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rotSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* MOBILE */
+@media(max-width:1100px){
+  section{padding:100px 40px}
+  #nav,#nav.solid{padding:18px 40px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .build-grid{grid-template-columns:1fr 1fr}
+  .intel-grid{grid-template-columns:1fr}
+  .intel-canvas-wrap{height:320px}
+  .robotics-grid{grid-template-columns:1fr}
+  .robotics-visual{height:320px}
+  .genesis-caps-grid{grid-template-columns:1fr 1fr}
+  .founder-grid{grid-template-columns:1fr}
+  .careers-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .why-cmp{grid-template-columns:1fr}
+  .why-vs{display:none}
+  .metrics{padding:32px 40px}
+  .inv-wrap{padding:60px 40px}
+  .research-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  section{padding:72px 24px}
+  #nav,#nav.solid{padding:16px 24px}
+  .nav-links,.nav-right{display:none}
+  .ham{display:flex}
+  .build-grid{grid-template-columns:1fr}
+  .genesis-caps-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bot{flex-direction:column;text-align:center}
+  .roadmap-track{flex-direction:column}
+  .phase{border-right:none;border-bottom:1px solid rgba(255,255,255,.04)}
+  .inv-metrics{gap:40px}
+  .floaters{bottom:16px;right:16px}
+  .hero-h1{letter-spacing:-1px}
+  .metrics{padding:28px 24px;gap:24px}
+  .product-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .product-gallery{grid-template-columns:1fr}
+  .pg-side{flex-direction:row}
+  .pg-main img,.pg-thumb img{height:240px}
+  .modal-box{margin:16px}
+  .modal-caps-grid{grid-template-columns:1fr}
+  .modal-hero h2{font-size:32px}
+}
+</style>
+
+<style>
+/* PRODUCTS & INTELLIGENCE SYSTEMS */
+.prod-intro{max-width:760px;margin-bottom:80px}
+.product-block{margin-bottom:120px}
+.product-block:last-child{margin-bottom:0}
+.product-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:36px;flex-wrap:wrap;gap:20px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding-bottom:28px;
+}
+.product-index{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;
+  color:var(--blue3);text-transform:uppercase;display:block;margin-bottom:14px;
+}
+.product-name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(34px,5vw,56px);font-weight:700;letter-spacing:-1px;line-height:1;
+}
+.product-version{
+  color:var(--blue2);font-weight:500;font-size:.55em;
+  vertical-align:middle;margin-left:4px;
+}
+.product-tagline{font-size:15px;color:var(--silver);margin-top:10px;font-weight:300}
+.product-status{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(255,255,255,.1);padding:9px 18px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;white-space:nowrap;
+}
+.status-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.status-live{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06)}
+.status-live .status-dot{background:#34d399;animation:pulse 1.8s infinite}
+.status-pre{color:#fbbf24;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06)}
+.status-pre .status-dot{background:#fbbf24;animation:pulse 1.8s infinite}
+
+.product-gallery{
+  display:grid;grid-template-columns:1.6fr 1fr;gap:8px;margin-bottom:32px;
+}
+.product-gallery-rev{grid-template-columns:1fr 1.6fr}
+.product-gallery-rev .pg-main{order:2}
+.product-gallery-rev .pg-side{order:1}
+.pg-main{
+  overflow:hidden;background:var(--dark);
+  border:1px solid rgba(255,255,255,.05);
+}
+.pg-main img{
+  width:100%;height:520px;object-fit:cover;display:block;
+  transition:transform .8s cubic-bezier(.4,0,.2,1);
+}
+.pg-main:hover img{transform:scale(1.04)}
+.pg-side{display:flex;flex-direction:column;gap:8px}
+.pg-thumb{
+  flex:1;overflow:hidden;background:var(--dark);
+  border:1px solid rgba(255,255,255,.05);
+}
+.pg-thumb img{
+  width:100%;height:100%;min-height:140px;object-fit:cover;display:block;
+  transition:transform .8s cubic-bezier(.4,0,.2,1);
+}
+.pg-thumb:hover img{transform:scale(1.06)}
+
+.product-footer{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:40px;flex-wrap:wrap;
+}
+.product-desc{
+  font-size:15px;color:var(--silver);line-height:1.85;max-width:680px;font-weight:300;
+}
+.btn-readmore{
+  background:transparent;border:1px solid rgba(21,101,255,.35);color:var(--blue3);
+  padding:14px 30px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;white-space:nowrap;transition:all .3s;font-family:'Inter',sans-serif;
+  flex-shrink:0;
+}
+.btn-readmore:hover{background:rgba(21,101,255,.12);border-color:var(--blue2)}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;z-index:10000;
+  background:rgba(1,2,4,.92);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .4s ease;
+  padding:40px 20px;overflow-y:auto;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-box{
+  background:var(--dark);border:1px solid rgba(255,255,255,.08);
+  max-width:920px;width:100%;margin:auto;position:relative;
+  transform:translateY(24px);transition:transform .4s ease;
+  max-height:90vh;overflow-y:auto;
+}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-close{
+  position:absolute;top:20px;right:20px;z-index:10;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(1,2,4,.7);border:1px solid rgba(255,255,255,.15);
+  color:var(--white);font-size:22px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+}
+.modal-close:hover{background:rgba(21,101,255,.3);border-color:var(--blue2)}
+.modal-hero{position:relative;height:340px;overflow:hidden}
+.modal-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.modal-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,8,15,.97) 10%,rgba(5,8,15,.5) 60%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:36px 40px;
+}
+.modal-hero-overlay h2{
+  font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;
+  margin:14px 0 6px;letter-spacing:-1px;
+}
+.modal-hero-overlay p{color:var(--silver);font-size:14px}
+.modal-body{padding:40px}
+.modal-section-title{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;
+  color:var(--blue3);text-transform:uppercase;margin-bottom:24px;
+}
+.modal-caps-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);
+  margin-bottom:40px;
+}
+.mcap{background:var(--black);padding:24px}
+.mcap h5{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;margin-bottom:8px}
+.mcap p{font-size:13px;color:var(--silver);line-height:1.65}
+.modal-vision{font-size:16px;color:var(--silver2);line-height:1.85;font-weight:300;font-style:normal}
+body.modal-active{overflow:hidden}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="assets/logo.png" alt="Tryvanta">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#genesis">Genesis</a></li>
+    <li><a href="#intelligence">Intelligence</a></li>
+    <li><a href="#robotics">Robotics</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#founder">About</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="n-btn">Contact</a>
+    <a href="#genesis" class="n-btn-fill">Get Started</a>
+  </div>
+  <div class="ham" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-vgradient"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="hero-dot"></span> Physical Intelligence Company</div>
+    <h1 class="hero-h1">
+      <span class="line1">Building</span>
+      <span class="line2">Physical Intelligence</span>
+    </h1>
+    <p class="hero-sub">Creating AI systems that understand, reason, learn, and act in the real world — bridging digital intelligence with physical reality.</p>
+    <div class="hero-ctas">
+      <a href="#genesis" class="hcta-p">Explore Genesis</a>
+      <a href="#research" class="hcta-o">View Research</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-bar"></div></div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric-item reveal"><span class="metric-num">6<b>+</b></span><span class="metric-lbl">AI Domains</span></div>
+  <div class="metric-item reveal"><span class="metric-num"><b>∞</b></span><span class="metric-lbl">Possibilities</span></div>
+  <div class="metric-item reveal"><span class="metric-num">1<b>st</b></span><span class="metric-lbl">Principles Thinking</span></div>
+  <div class="metric-item reveal"><span class="metric-num"><b>$</b>33B<b>+</b></span><span class="metric-lbl">Market by 2030</span></div>
+  <div class="metric-item reveal"><span class="metric-num">2035</span><span class="metric-lbl">Vision Horizon</span></div>
+</div>
+
+<!-- WHAT WE BUILD -->
+<section id="build">
+  <div class="build-intro reveal">
+    <div class="s-label">What We Build</div>
+    <h2 class="s-title">Intelligence Across<br>Every Dimension</h2>
+  </div>
+  <div class="build-grid reveal">
+    <div class="bc">
+      <div class="bc-num">01</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="7" stroke="#2979ff" stroke-width="1.2"/>
+          <circle cx="22" cy="7" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="35.5" cy="14.5" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="35.5" cy="29.5" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="22" cy="37" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="8.5" cy="29.5" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="8.5" cy="14.5" r="2.5" fill="rgba(41,121,255,.25)" stroke="#5c9aff" stroke-width="1"/>
+          <line x1="22" y1="9.5" x2="22" y2="15" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+          <line x1="33" y1="17" x2="28" y2="20" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+          <line x1="33" y1="27" x2="28" y2="24" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+          <line x1="22" y1="34.5" x2="22" y2="29" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+          <line x1="11" y1="27" x2="16" y2="24" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+          <line x1="11" y1="17" x2="16" y2="20" stroke="#2979ff" stroke-width=".8" opacity=".5"/>
+        </svg>
+      </div>
+      <h3>Artificial Intelligence</h3>
+      <p>Advanced reasoning systems that perceive, model, and understand the world at human and superhuman levels.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+    <div class="bc">
+      <div class="bc-num">02</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none">
+          <rect x="6" y="18" width="32" height="20" rx="1.5" stroke="#2979ff" stroke-width="1.2"/>
+          <path d="M14 18V12a8 8 0 0116 0v6" stroke="#5c9aff" stroke-width="1.2"/>
+          <circle cx="22" cy="28" r="3" fill="#2979ff" opacity=".8"/>
+          <line x1="22" y1="31" x2="22" y2="35" stroke="#5c9aff" stroke-width="1.2"/>
+          <circle cx="13" cy="28" r="1.5" fill="#5c9aff" opacity=".4"/>
+          <circle cx="31" cy="28" r="1.5" fill="#5c9aff" opacity=".4"/>
+        </svg>
+      </div>
+      <h3>Agentic AI</h3>
+      <p>Autonomous agents that plan, decide, and execute complex multi-step tasks without human intervention.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+    <div class="bc">
+      <div class="bc-num">03</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none">
+          <path d="M8 12h28M8 20h22M8 28h18" stroke="#2979ff" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="37" cy="28" r="5" stroke="#5c9aff" stroke-width="1.2"/>
+          <circle cx="37" cy="28" r="2" fill="#2979ff"/>
+          <circle cx="11" cy="12" r="1.2" fill="#5c9aff" opacity=".5"/>
+        </svg>
+      </div>
+      <h3>Conversational AI</h3>
+      <p>Human-like dialogue systems with deep contextual understanding, memory, and emotional intelligence.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+    <div class="bc">
+      <div class="bc-num">04</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="13" stroke="#2979ff" stroke-width="1.2"/>
+          <circle cx="22" cy="22" r="6" stroke="#5c9aff" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="22" cy="22" r="2.5" fill="#2979ff"/>
+          <line x1="22" y1="9" x2="22" y2="16" stroke="#5c9aff" stroke-width="1"/>
+          <line x1="35" y1="22" x2="28" y2="22" stroke="#5c9aff" stroke-width="1"/>
+          <line x1="22" y1="35" x2="22" y2="28" stroke="#5c9aff" stroke-width="1"/>
+          <line x1="9" y1="22" x2="16" y2="22" stroke="#5c9aff" stroke-width="1"/>
+        </svg>
+      </div>
+      <h3>Physical AI</h3>
+      <p>Intelligence embedded in the physical world — systems that sense, move, and act in real environments.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+    <div class="bc">
+      <div class="bc-num">05</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none">
+          <rect x="15" y="4" width="14" height="10" rx="1.5" stroke="#2979ff" stroke-width="1.2"/>
+          <rect x="11" y="18" width="22" height="18" rx="1.5" stroke="#5c9aff" stroke-width="1.2"/>
+          <line x1="22" y1="14" x2="22" y2="18" stroke="#2979ff" stroke-width="1.2"/>
+          <rect x="7" y="38" width="7" height="5" rx="1" stroke="#5c9aff" stroke-width="1"/>
+          <rect x="30" y="38" width="7" height="5" rx="1" stroke="#5c9aff" stroke-width="1"/>
+          <circle cx="18" cy="27" r="1.8" fill="#2979ff"/>
+          <circle cx="26" cy="27" r="1.8" fill="#2979ff"/>
+          <line x1="22" y1="36" x2="22" y2="43" stroke="#5c9aff" stroke-width="1" opacity=".4"/>
+        </svg>
+      </div>
+      <h3>Robotics</h3>
+      <p>Intelligent robotic systems that collaborate with humans, adapt to environments, and extend human capability.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+    <div class="bc">
+      <div class="bc-num">06</div>
+      <div class="bc-icon">
+        <svg viewBox="0 0 44 44" fill="none">
+          <path d="M4 38L22 6l18 32H4z" stroke="#2979ff" stroke-width="1.2" stroke-linejoin="round"/>
+          <line x1="12" y1="27" x2="32" y2="27" stroke="#5c9aff" stroke-width=".8" opacity=".5"/>
+          <circle cx="22" cy="20" r="3" fill="rgba(41,121,255,.35)" stroke="#5c9aff" stroke-width="1"/>
+          <line x1="22" y1="6" x2="22" y2="17" stroke="#5c9aff" stroke-width=".8" opacity=".3"/>
+        </svg>
+      </div>
+      <h3>Research</h3>
+      <p>Breakthrough research at the frontier of AI, robotics, and embodied intelligence — pushing the known limits.</p>
+      <span class="bc-arr">&#8599;</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS & INTELLIGENCE SYSTEMS -->
+<section id="genesis">
+  <div class="prod-intro reveal">
+    <div class="s-label">Products &amp; Intelligence Systems</div>
+    <h2 class="s-title">What We Are<br>Actually Building</h2>
+    <p class="s-sub">Not concepts. Not roadmap slides. Real platforms in active development — engineered to think, remember, speak, and act in the physical world.</p>
+  </div>
+
+  <!-- PRODUCT 01: GENESIS -->
+  <div class="product-block reveal">
+    <div class="product-header">
+      <div class="product-header-left">
+        <span class="product-index">Product 01</span>
+        <h3 class="product-name">GENESIS <span class="product-version">AV 1.3</span></h3>
+        <p class="product-tagline">The Physical Intelligence Operating System</p>
+      </div>
+      <div class="product-status status-live">
+        <span class="status-dot"></span> Production Ready
+      </div>
+    </div>
+
+    <div class="product-gallery">
+      <div class="pg-main">
+        <img src="assets/genesis1.png" alt="Genesis AV 1.3 — Intelligence Core" loading="lazy">
+      </div>
+      <div class="pg-side">
+        <div class="pg-thumb"><img src="assets/genesis2.jpg" alt="Genesis AV 1.3 Interface" loading="lazy"></div>
+        <div class="pg-thumb"><img src="assets/genesis3.jpg" alt="Genesis AV 1.3 Listening State" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="product-footer">
+      <p class="product-desc">Genesis AV 1.3 is Tryvanta&rsquo;s flagship artificial intelligence platform, designed to perceive, reason, remember, communicate, and act across digital and physical environments — combining conversational intelligence, long-term memory, agentic reasoning, multimodal understanding, and robotics integration into one unified system.</p>
+      <button class="btn-readmore" onclick="openModal('genesis-modal')">Explore Genesis AV 1.3 &#8594;</button>
+    </div>
+  </div>
+
+  <!-- PRODUCT 02: MAYA ROBO -->
+  <div class="product-block reveal">
+    <div class="product-header">
+      <div class="product-header-left">
+        <span class="product-index">Product 02</span>
+        <h3 class="product-name">MAYA <span class="product-version">ROBO</span></h3>
+        <p class="product-tagline">The Human-Centered Humanoid Intelligence Platform</p>
+      </div>
+      <div class="product-status status-pre">
+        <span class="status-dot"></span> Pre-Production
+      </div>
+    </div>
+
+    <div class="product-gallery product-gallery-rev">
+      <div class="pg-main">
+        <img src="assets/maya3.png" alt="Maya Robo — Full Platform" loading="lazy">
+      </div>
+      <div class="pg-side">
+        <div class="pg-thumb"><img src="assets/maya1.png" alt="Maya Robo — Integration Lab" loading="lazy"></div>
+        <div class="pg-thumb"><img src="assets/maya2.png" alt="Maya Robo — Neural Assembly" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="product-footer">
+      <p class="product-desc">Maya Robo is Tryvanta&rsquo;s specialized humanoid robotics platform, designed for intelligent interaction, assistance, learning, and real-world collaboration — combining advanced artificial intelligence with embodied robotics to bridge digital cognition and physical action.</p>
+      <button class="btn-readmore" onclick="openModal('maya-modal')">Discover Maya Robo &#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- GENESIS MODAL -->
+<div class="modal-overlay" id="genesis-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('genesis-modal')">&times;</button>
+    <div class="modal-hero">
+      <img src="assets/genesis1.png" alt="Genesis AV 1.3">
+      <div class="modal-hero-overlay">
+        <span class="product-status status-live"><span class="status-dot"></span> Production Ready</span>
+        <h2>GENESIS <span class="product-version">AV 1.3</span></h2>
+        <p>The Physical Intelligence Operating System</p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <h4 class="modal-section-title">Core Capabilities</h4>
+      <div class="modal-caps-grid">
+        <div class="mcap"><h5>Conversational Intelligence</h5><p>Natural language understanding and dialogue systems with deep contextual awareness.</p></div>
+        <div class="mcap"><h5>Agentic Intelligence</h5><p>Multi-step planning, reasoning, execution, and autonomous decision making.</p></div>
+        <div class="mcap"><h5>Long-Term Memory</h5><p>Persistent memory architecture capable of storing and retrieving knowledge across interactions.</p></div>
+        <div class="mcap"><h5>Multimodal Understanding</h5><p>Voice, text, image, and sensor data processing in a unified intelligence layer.</p></div>
+        <div class="mcap"><h5>Physical AI Integration</h5><p>Designed to connect digital intelligence with real-world robotic systems.</p></div>
+        <div class="mcap"><h5>Autonomous Workflows</h5><p>Capable of orchestrating complex tasks and processes with minimal human supervision.</p></div>
+      </div>
+      <h4 class="modal-section-title">Vision</h4>
+      <p class="modal-vision">Genesis AV 1.3 represents Tryvanta&rsquo;s first step toward creating intelligence that can move beyond software and operate meaningfully within the physical world.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAYA MODAL -->
+<div class="modal-overlay" id="maya-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('maya-modal')">&times;</button>
+    <div class="modal-hero">
+      <img src="assets/maya3.png" alt="Maya Robo">
+      <div class="modal-hero-overlay">
+        <span class="product-status status-pre"><span class="status-dot"></span> Pre-Production</span>
+        <h2>MAYA <span class="product-version">ROBO</span></h2>
+        <p>The Human-Centered Humanoid Intelligence Platform</p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <h4 class="modal-section-title">Core Capabilities</h4>
+      <div class="modal-caps-grid">
+        <div class="mcap"><h5>Human-AI Interaction</h5><p>Natural conversations with deep contextual understanding.</p></div>
+        <div class="mcap"><h5>Physical Assistance</h5><p>Designed to interact safely within human environments.</p></div>
+        <div class="mcap"><h5>Adaptive Learning</h5><p>Continuously improves through observation and experience.</p></div>
+        <div class="mcap"><h5>Multimodal Perception</h5><p>Visual, auditory, and environmental awareness in real time.</p></div>
+        <div class="mcap"><h5>Robotics Intelligence</h5><p>Decision making integrated directly with physical action.</p></div>
+        <div class="mcap"><h5>Future Expansion</h5><p>Platform architecture designed for industrial, enterprise, educational, and research applications.</p></div>
+      </div>
+      <h4 class="modal-section-title">Vision</h4>
+      <p class="modal-vision">Maya Robo is Tryvanta&rsquo;s vision for the next generation of intelligent machines — capable of working alongside humans, learning from the world, and contributing to society in meaningful ways.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INTELLIGENCE -->
+<section id="intelligence">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:72px" class="reveal">
+    <div>
+      <div class="s-label">Tryvanta Intelligence</div>
+      <h2 class="s-title">The Architecture of<br>Machine Thought</h2>
+    </div>
+    <div style="padding-top:20px">
+      <p class="s-sub">A complete stack of intelligence capabilities — from raw perception to complex decision-making, from language to autonomous physical action.</p>
+    </div>
+  </div>
+  <div class="intel-grid">
+    <div class="intel-canvas-wrap reveal-left">
+      <canvas id="intel-canvas"></canvas>
+    </div>
+    <div class="intel-items reveal-right">
+      <div class="ii">
+        <div class="ii-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="#2979ff" stroke-width="1.2"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="#5c9aff" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div><h4>AI Agents</h4><p>Goal-directed autonomous systems that plan and execute complex workflows across dynamic environments.</p></div>
+      </div>
+      <div class="ii">
+        <div class="ii-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="6" stroke="#2979ff" stroke-width="1.2"/><circle cx="12" cy="12" r="1.5" fill="#2979ff"/><line x1="12" y1="6" x2="12" y2="18" stroke="#5c9aff" stroke-width=".8" opacity=".4"/></svg>
+        </div>
+        <div><h4>Memory Systems</h4><p>Episodic, semantic, and procedural memory architectures enabling persistent, adaptive intelligence over time.</p></div>
+      </div>
+      <div class="ii">
+        <div class="ii-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="8" height="8" rx="1" stroke="#2979ff" stroke-width="1.2"/><rect x="14" y="2" width="8" height="8" rx="1" stroke="#5c9aff" stroke-width="1.2"/><rect x="2" y="14" width="8" height="8" rx="1" stroke="#5c9aff" stroke-width="1.2"/><circle cx="18" cy="18" r="5" stroke="#2979ff" stroke-width="1.2"/></svg>
+        </div>
+        <div><h4>Multimodal Intelligence</h4><p>Unified understanding across vision, language, audio, sensor data, and embodied physical perception.</p></div>
+      </div>
+      <div class="ii">
+        <div class="ii-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2z" stroke="#2979ff" stroke-width="1.2" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14" stroke="#5c9aff" stroke-width="1.2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="#2979ff"/></svg>
+        </div>
+        <div><h4>Decision Engines</h4><p>Real-time inference systems optimized for speed, accuracy, and safety under uncertainty and constraint.</p></div>
+      </div>
+      <div class="ii">
+        <div class="ii-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 18V8l9-6 9 6v10" stroke="#2979ff" stroke-width="1.2" stroke-linecap="round"/><rect x="8" y="11" width="8" height="7" stroke="#5c9aff" stroke-width="1.2"/></svg>
+        </div>
+        <div><h4>Knowledge Systems</h4><p>Structured and unstructured knowledge representation enabling deep reasoning and broad generalization.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROBOTICS -->
+<section id="robotics">
+  <div class="robotics-bg"></div>
+  <div style="position:relative;z-index:1">
+    <div class="robotics-grid">
+      <div class="reveal-left">
+        <div class="s-label">Tryvanta Robotics</div>
+        <h2 class="s-title">Machines That<br>Think and Act</h2>
+        <p class="s-sub" style="margin-bottom:0">Robotic systems powered by Physical AI — robots that don't just follow commands, but understand, adapt, and collaborate as intelligent partners in the physical world.</p>
+        <div class="r-pillars">
+          <div class="rp">
+            <div class="rp-icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#2979ff" stroke-width="1.2"/><path d="M8 12h8M12 8v8" stroke="#5c9aff" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div><h4>Physical AI</h4><p>Intelligence grounded in physical reality — sensing, reasoning, and acting in open environments.</p></div>
+          </div>
+          <div class="rp">
+            <div class="rp-icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="6" rx="1" stroke="#2979ff" stroke-width="1.2"/><rect x="6" y="10" width="12" height="10" rx="1" stroke="#5c9aff" stroke-width="1.2"/><rect x="4" y="21" width="4" height="3" rx=".5" stroke="#5c9aff" stroke-width="1"/><rect x="16" y="21" width="4" height="3" rx=".5" stroke="#5c9aff" stroke-width="1"/></svg>
+            </div>
+            <div><h4>Robotics Platforms</h4><p>Modular, adaptive robotic architectures designed for real-world deployment across industries.</p></div>
+          </div>
+          <div class="rp">
+            <div class="rp-icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#2979ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div><h4>Autonomous Systems</h4><p>Self-directed operation in complex open environments — without human hand-holding.</p></div>
+          </div>
+          <div class="rp">
+            <div class="rp-icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="8" cy="12" r="4" stroke="#2979ff" stroke-width="1.2"/><circle cx="16" cy="12" r="4" stroke="#5c9aff" stroke-width="1.2"/><line x1="12" y1="8" x2="12" y2="16" stroke="#2979ff" stroke-width=".8" opacity=".5"/></svg>
+            </div>
+            <div><h4>Human-Robot Collaboration</h4><p>Seamless co-working between humans and robots — safe, intuitive, and powerful.</p></div>
+          </div>
+          <div class="rp">
+            <div class="rp-icon">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="#2979ff" stroke-width="1.2"/><path d="M8 12s1.5 3 4 3 4-3 4-3" stroke="#5c9aff" stroke-width="1.2" stroke-linecap="round"/><circle cx="9" cy="9" r="1" fill="#2979ff"/><circle cx="15" cy="9" r="1" fill="#2979ff"/></svg>
+            </div>
+            <div><h4>Embodied Intelligence</h4><p>Full cognition expressed through physical form — the ultimate convergence of AI and robotics.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="robotics-visual reveal-right">
+        <canvas id="robotics-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto 0">
+    <div class="s-label" style="justify-content:center">Tryvanta Ecosystem</div>
+    <h2 class="s-title">Everything Connects</h2>
+    <p class="s-sub" style="margin:0 auto">From intelligence to embodiment — a complete stack for Physical AI, built as one unified system.</p>
+  </div>
+  <div class="eco-diagram reveal">
+    <div class="eco-node highlight"><h4>Tryvanta Intelligence</h4><p>Foundation AI layer — reasoning, memory, language</p></div>
+    <div class="eco-connector"><div class="eco-line"></div><div class="eco-arr">&#9660;</div></div>
+    <div class="eco-node"><h4>Genesis Platform</h4><p>Unified Physical Intelligence OS</p></div>
+    <div class="eco-connector"><div class="eco-line"></div><div class="eco-arr">&#9660;</div></div>
+    <div class="eco-node"><h4>Physical AI</h4><p>Digital intelligence → physical action</p></div>
+    <div class="eco-connector"><div class="eco-line"></div><div class="eco-arr">&#9660;</div></div>
+    <div class="eco-node"><h4>Robotics</h4><p>Intelligent physical systems in the world</p></div>
+    <div class="eco-connector"><div class="eco-line"></div><div class="eco-arr">&#9660;</div></div>
+    <div class="eco-node"><h4>Embodied Intelligence</h4><p>Machines that think, learn, and adapt like beings</p></div>
+    <div class="eco-connector"><div class="eco-line"></div><div class="eco-arr">&#9660;</div></div>
+    <div class="eco-node highlight"><h4>Future AGI Systems</h4><p>The horizon we are building toward</p></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;flex-wrap:wrap;gap:20px" class="reveal">
+    <div>
+      <div class="s-label">Tryvanta Research</div>
+      <h2 class="s-title">At the Frontier<br>of What's Possible</h2>
+    </div>
+    <a href="#contact" class="n-btn" style="align-self:flex-end">View All Research &#8599;</a>
+  </div>
+  <div class="research-grid reveal">
+    <div class="rc">
+      <div class="rc-tag">Publication &middot; 2025</div>
+      <h3>Embodied Reasoning in Unstructured Environments</h3>
+      <p>Exploring how AI systems can develop robust physical reasoning without explicit environment modeling or pre-programmed rules.</p>
+      <a href="#" class="rc-link">Read Paper &#8599;</a>
+    </div>
+    <div class="rc">
+      <div class="rc-tag">Experiment &middot; Active</div>
+      <h3>Cross-Modal Memory Consolidation in Physical Agents</h3>
+      <p>How robotic agents can consolidate sensory experiences across modalities into durable, transferable long-term memory.</p>
+      <a href="#" class="rc-link">Explore &#8599;</a>
+    </div>
+    <div class="rc">
+      <div class="rc-tag">Dataset &middot; Open Access</div>
+      <h3>TRYVANTA-1: Physical Interaction Benchmark</h3>
+      <p>A large-scale dataset for benchmarking Physical Intelligence across manipulation, navigation, and human-robot interaction.</p>
+      <a href="#" class="rc-link">Access Dataset &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="founder-grid">
+    <div class="reveal-left">
+      <div class="founder-img-frame">
+        <img src="assets/founder.png" alt="Avishkar Roopi — Founder, Tryvanta" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <div class="founder-badge">
+          <div class="founder-badge-name">Avishkar Roopi</div>
+          <div class="founder-badge-role">Founder &amp; Chief Architect, Tryvanta</div>
+        </div>
+      </div>
+    </div>
+    <div class="founder-content reveal-right">
+      <div class="s-label">Meet The Founder</div>
+      <h2 class="s-title">The Vision<br>Behind Tryvanta</h2>
+      <blockquote class="founder-quote">"The future belongs to systems that can think, learn, and act in the real world."</blockquote>
+      <p class="founder-story">Avishkar Roopi is the visionary builder behind Tryvanta&rsquo;s Physical Intelligence systems, AI platforms, and robotics technologies — focused on bridging the gap between digital cognition and real-world action.</p>
+      <p class="founder-story">What started as a deep exploration of intelligent systems evolved into a mission: to create Physical Intelligence that perceives, reasons, learns, and acts in reality. Today, Tryvanta is building the foundation for the next generation of AI, Robotics, and Embodied Intelligence — not incremental progress, but a new category entirely.</p>
+      <div class="founder-timeline">
+        <div class="ft"><span class="ft-yr">Origin</span><span class="ft-text"><strong>The Question.</strong> A deep frustration with the gap between digital intelligence and physical reality.</span></div>
+        <div class="ft"><span class="ft-yr">Vision</span><span class="ft-text"><strong>The Mission.</strong> Defining Physical Intelligence as a new category worth building for.</span></div>
+        <div class="ft"><span class="ft-yr">Today</span><span class="ft-text"><strong>TRYVANTA.</strong> Building Genesis and Maya — real products, not concepts.</span></div>
+        <div class="ft"><span class="ft-yr">2035</span><span class="ft-text"><strong>The Horizon.</strong> A global Physical Intelligence platform that changes how the world operates.</span></div>
+      </div>
+      <a href="https://www.linkedin.com/in/avishkar-roopi" target="_blank" class="btn-li">
+        <svg width="16" height="16" fill="#2979ff" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRYVANTA -->
+<section id="why">
+  <div class="why-header reveal">
+    <div class="s-label" style="justify-content:center">Why Tryvanta</div>
+    <h2 class="s-title">A New Category<br>of Intelligence</h2>
+    <p class="s-sub" style="margin:0 auto;text-align:center">The market shift from software to physical intelligence is the largest platform transition in decades. Tryvanta is defining it.</p>
+  </div>
+  <div class="why-cmp reveal">
+    <div class="why-col">
+      <h3>Traditional Software</h3>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> Static rule-based behavior</div>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> No physical world awareness</div>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> Screen-bound interaction only</div>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> Cannot learn from experience</div>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> Fails in novel situations</div>
+      <div class="wi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="3" y1="3" x2="13" y2="13" stroke="#ef4444" stroke-width="1.5"/><line x1="13" y1="3" x2="3" y2="13" stroke="#ef4444" stroke-width="1.5"/></svg> Requires constant human oversight</div>
+    </div>
+    <div class="why-vs">VS</div>
+    <div class="why-col tryvanta">
+      <h3>Physical Intelligence</h3>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Adaptive, reasoning behavior</div>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Full physical world awareness</div>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Acts in real environments</div>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Continuously learns and improves</div>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Generalizes to any new situation</div>
+      <div class="wi tq"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="#2979ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Closes the loop autonomously</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="reveal" style="margin-bottom:72px">
+    <div class="s-label">Tryvanta Roadmap</div>
+    <h2 class="s-title">The Road to<br>Physical Intelligence</h2>
+  </div>
+  <div class="roadmap-track reveal">
+    <div class="phase"><span class="phase-yr">2025</span><h3>Genesis AV 1.3</h3><p>Production Ready — flagship Physical Intelligence platform now live.</p></div>
+    <div class="phase"><span class="phase-yr">2026</span><h3>Genesis AV 2.0</h3><p>Advanced agentic intelligence with deeper autonomous reasoning capabilities.</p></div>
+    <div class="phase"><span class="phase-yr">2027</span><h3>Maya Robo Alpha</h3><p>Pre-production deployment of Tryvanta&rsquo;s first humanoid intelligence platform.</p></div>
+    <div class="phase"><span class="phase-yr">2028</span><h3>Maya Robo Beta</h3><p>Human-robot collaboration trials across real-world environments.</p></div>
+    <div class="phase"><span class="phase-yr">2030</span><h3>Physical Intelligence Network</h3><p>Interconnected Genesis and Maya systems operating at scale.</p></div>
+    <div class="phase"><span class="phase-yr">2035</span><h3>Global Infrastructure</h3><p>Planetary-scale Physical Intelligence infrastructure powering the next era of civilization.</p></div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="careers-grid">
+    <div class="reveal-left">
+      <div class="s-label">Careers</div>
+      <h2 class="s-title">Build What<br>Doesn't Exist Yet</h2>
+      <div class="career-vals">
+        <div class="cv">
+          <div class="cv-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="#2979ff" stroke-width="1.2"/></svg></div>
+          <div><h4>Deep Research Culture</h4><p>Work on problems that have never been solved. Your contributions here will matter for decades.</p></div>
+        </div>
+        <div class="cv">
+          <div class="cv-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#2979ff" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
+          <div><h4>Move Fast, Think Deep</h4><p>The urgency of a startup with the intellectual depth of a world-class research lab.</p></div>
+        </div>
+        <div class="cv">
+          <div class="cv-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#2979ff" stroke-width="1.2"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" stroke="#5c9aff" stroke-width="1" opacity=".5"/></svg></div>
+          <div><h4>Outsized Impact</h4><p>What we build here will affect every person on the planet. That is not an exaggeration.</p></div>
+        </div>
+        <div class="cv">
+          <div class="cv-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2979ff" stroke-width="1.2"/><circle cx="9" cy="7" r="4" stroke="#2979ff" stroke-width="1.2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#5c9aff" stroke-width="1.2"/></svg></div>
+          <div><h4>World-Class Team</h4><p>Work alongside people who are obsessively exceptional at what they do.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="career-right reveal-right">
+      <div class="career-big">Join us in building<br>the <span>future.</span></div>
+      <p class="career-note">We are looking for researchers, engineers, designers, and builders who believe that intelligence — real intelligence — can exist beyond the screen. If that is you, we want to talk.</p>
+      <a href="mailto:careers@tryvanta.com" class="btn-careers">Apply Now &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTOR -->
+<section id="investor">
+  <div class="inv-wrap reveal">
+    <div class="s-label" style="justify-content:center">Investors</div>
+    <h2 class="inv-title">A Once-in-a-Generation<br>Opportunity</h2>
+    <p class="inv-sub">Physical Intelligence is the next major computing platform. Tryvanta is building the company that defines this category — from foundational research to global deployment.</p>
+    <div class="inv-metrics">
+      <div class="im"><h4>$33B+</h4><p>AI Robotics Market by 2030</p></div>
+      <div class="im"><h4>2035</h4><p>Vision Horizon</p></div>
+      <div class="im"><h4>Phase 1</h4><p>Currently Active</p></div>
+    </div>
+    <p class="inv-sub">We are defining a new category. Early partners will shape a company built to operate at planetary scale.</p>
+    <br><br>
+    <a href="mailto:investors@tryvanta.com" class="btn-inv">Request Investor Deck &#8599;</a>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section id="press">
+  <div class="reveal" style="margin-bottom:56px">
+    <div class="s-label">Recognition</div>
+    <h2 class="s-title" style="font-size:clamp(28px,3vw,40px)">Press &amp; Partners</h2>
+  </div>
+  <div class="press-logos reveal">
+    <div class="press-item"><div class="press-placeholder">Press<br>Coming Soon</div></div>
+    <div class="press-item"><div class="press-placeholder">Media<br>Coverage</div></div>
+    <div class="press-item"><div class="press-placeholder">Research<br>Partners</div></div>
+    <div class="press-item"><div class="press-placeholder">Industry<br>Recognition</div></div>
+    <div class="press-item"><div class="press-placeholder">Investor<br>Network</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:72px" class="reveal">
+    <div>
+      <div class="s-label">Contact</div>
+      <h2 class="s-title">Let's Build<br>the Future Together</h2>
+    </div>
+    <div style="padding-top:24px">
+      <p class="s-sub">Whether you are an investor, collaborator, customer, or potential team member — we want to hear from you.</p>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div class="c-info reveal-left">
+      <div class="ci">
+        <div class="ci-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#2979ff" stroke-width="1.2"/><polyline points="22,6 12,13 2,6" stroke="#5c9aff" stroke-width="1.2"/></svg></div>
+        <div><h4>Email</h4><a href="mailto:hello@tryvanta.com">hello@tryvanta.com</a></div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.14 2.86 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#2979ff" stroke-width="1.2"/></svg></div>
+        <div><h4>Phone</h4><a href="tel:+919398017435">+91 93980 17435</a></div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><svg width="18" height="18" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div><h4>WhatsApp</h4><a href="https://wa.me/919398017435" target="_blank">Chat on WhatsApp</a></div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><svg width="18" height="18" fill="#2979ff" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+        <div><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/avishkar-roopi" target="_blank">Avishkar Roopi</a></div>
+      </div>
+    </div>
+    <div class="c-form reveal-right">
+      <div class="fr">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Avishkar"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Roopi"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+      <div class="fg"><label>I am a</label>
+        <select>
+          <option value="">Select your intent</option>
+          <option>Potential Investor</option>
+          <option>Enterprise Customer</option>
+          <option>Research Collaborator</option>
+          <option>Potential Team Member</option>
+          <option>Press / Media</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Message</label><textarea rows="5" placeholder="Tell us about your interest in Tryvanta..."></textarea></div>
+      <button class="btn-sub" onclick="submitForm(this)">Send Message &#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="fb">
+      <a href="#hero" class="fb-logo">
+        <img src="assets/logo.png" alt="Tryvanta">
+        <span>TRYVANTA</span>
+      </a>
+      <p>Building Physical Intelligence — AI systems that understand, reason, learn, and act in the real world. The next frontier of human progress starts here.</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/avishkar-roopi" target="_blank" class="sl">in</a>
+        <a href="https://wa.me/919398017435" target="_blank" class="sl">W</a>
+        <a href="mailto:hello@tryvanta.com" class="sl">@</a>
+        <a href="tel:+919398017435" class="sl">T</a>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>Technology</h4>
+      <ul>
+        <li><a href="#genesis">Genesis Platform</a></li>
+        <li><a href="#intelligence">Intelligence</a></li>
+        <li><a href="#robotics">Robotics</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#founder">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#investor">Investors</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/avishkar-roopi" target="_blank">LinkedIn</a></li>
+        <li><a href="https://wa.me/919398017435" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:hello@tryvanta.com">Email</a></li>
+        <li><a href="tel:+919398017435">Call Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>&copy; 2025 TRYVANTA. All rights reserved. Intelligence | Robotics | Future.</span>
+    <span style="letter-spacing:3px;font-size:9px">BUILDING PHYSICAL INTELLIGENCE</span>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="floaters">
+  <a href="https://wa.me/919398017435" target="_blank" class="fl-btn fl-wa" data-t="WhatsApp Us">
+    <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="tel:+919398017435" class="fl-btn fl-call" data-t="Call Us">
+    <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+</div>
+
+<script>
+// ── NAV ─────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 60));
+function toggleNav() { nav.classList.toggle('nav-open'); }
+
+// ── REVEAL ──────────────────────────────────────────────
+const ro = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => ro.observe(el));
+
+// ── HERO CANVAS ─────────────────────────────────────────
+(function(){
+  const c = document.getElementById('hero-canvas');
+  const ctx = c.getContext('2d');
+  let W,H,nodes=[],streams=[];
+
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; init(); }
+
+  function init(){
+    nodes=[];streams=[];
+    const n = Math.min(100, Math.floor(W*H/10000));
+    for(let i=0;i<n;i++) nodes.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+      r:Math.random()*1.5+.5, pulse:Math.random()*Math.PI*2
+    });
+    for(let i=0;i<8;i++) spawnStream();
+  }
+
+  function spawnStream(){
+    streams.push({
+      x:Math.random()*W, y:H+20,
+      speed:Math.random()*.8+.3,
+      chars:Array.from({length:Math.floor(Math.random()*12+6)},()=>String.fromCharCode(0x30A0+Math.floor(Math.random()*96))),
+      life:1, decay:.002+Math.random()*.002,
+      col:Math.random()<.3?'rgba(0,212,255,':'rgba(21,101,255,'
+    });
+  }
+
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=.008;
+
+    // Edges
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<160){
+          const a=(1-d/160)*.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x,nodes[i].y);
+          ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle=`rgba(41,121,255,${a})`;
+          ctx.lineWidth=.4;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Nodes
+    nodes.forEach(n=>{
+      n.x+=n.vx; n.y+=n.vy; n.pulse+=.02;
+      if(n.x<0||n.x>W) n.vx*=-1;
+      if(n.y<0||n.y>H) n.vy*=-1;
+      const pulse=Math.sin(n.pulse)*.3+.7;
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(92,154,255,${pulse*.7})`;
+      ctx.fill();
+    });
+
+    // Data streams (Matrix-like)
+    streams.forEach((s,i)=>{
+      s.y-=s.speed;
+      s.life-=s.decay;
+      if(s.life<=0){ streams.splice(i,1); spawnStream(); return; }
+      ctx.font='10px monospace';
+      s.chars.forEach((ch,ci)=>{
+        const a=s.life*(1-ci/s.chars.length)*.3;
+        ctx.fillStyle=`${s.col}${a})`;
+        ctx.fillText(ch, s.x, s.y+ci*14);
+      });
+    });
+
+    // Scanning line
+    const scanY=(Math.sin(t*.5)+1)/2*H;
+    const scanGrad=ctx.createLinearGradient(0,scanY-30,0,scanY+30);
+    scanGrad.addColorStop(0,'transparent');
+    scanGrad.addColorStop(.5,'rgba(21,101,255,.04)');
+    scanGrad.addColorStop(1,'transparent');
+    ctx.fillStyle=scanGrad;
+    ctx.fillRect(0,scanY-30,W,60);
+
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ── GENESIS CANVAS ───────────────────────────────────────
+(function(){
+  const c=document.getElementById('genesis-canvas');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  let W,H,rings=[],particles=[];
+
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; init(); }
+
+  function init(){
+    rings=[80,140,200,260,320].map((r,i)=>({
+      r,angle:Math.random()*Math.PI*2,
+      speed:(i%2===0?1:-1)*(i===4?.0008:.001+i*.0004),
+      nodes:3+i*2,dotR:2.5-i*.2
+    }));
+    particles=[];
+    for(let i=0;i<30;i++) spawnP();
+  }
+
+  function spawnP(){
+    const angle=Math.random()*Math.PI*2;
+    const speed=Math.random()*.4+.1;
+    particles.push({
+      x:W/2+Math.cos(angle)*20, y:H/2+Math.sin(angle)*20,
+      vx:Math.cos(angle+.5)*speed, vy:Math.sin(angle+.5)*speed,
+      life:1, decay:.005+Math.random()*.005, r:Math.random()+.5
+    });
+  }
+
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2, cy=H/2;
+    t+=.008;
+
+    // Core glow
+    const cg=ctx.createRadialGradient(cx,cy,0,cx,cy,60);
+    cg.addColorStop(0,'rgba(21,101,255,.25)');
+    cg.addColorStop(.5,'rgba(21,101,255,.06)');
+    cg.addColorStop(1,'transparent');
+    ctx.fillStyle=cg;
+    ctx.beginPath();
+    ctx.arc(cx,cy,60,0,Math.PI*2);
+    ctx.fill();
+
+    // Core
+    ctx.beginPath();
+    ctx.arc(cx,cy,10,0,Math.PI*2);
+    ctx.fillStyle=`rgba(21,101,255,${.6+Math.sin(t*3)*.3})`;
+    ctx.fill();
+
+    rings.forEach((ring,ri)=>{
+      ring.angle+=ring.speed;
+      ctx.beginPath();
+      ctx.arc(cx,cy,ring.r,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(41,121,255,${.05+ri*.01})`;
+      ctx.lineWidth=.8;
+      ctx.stroke();
+
+      for(let i=0;i<ring.nodes;i++){
+        const a=ring.angle+(Math.PI*2/ring.nodes)*i;
+        const nx=cx+Math.cos(a)*ring.r;
+        const ny=cy+Math.sin(a)*ring.r;
+        const pulse=Math.sin(t*2+i)*.3+.7;
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.lineTo(nx,ny);
+        ctx.strokeStyle=`rgba(41,121,255,${.08*pulse})`;
+        ctx.lineWidth=.5;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(nx,ny,ring.dotR,0,Math.PI*2);
+        ctx.fillStyle=ri===0?`rgba(0,212,255,${pulse*.9})`:`rgba(92,154,255,${pulse*.7})`;
+        ctx.fill();
+      }
+    });
+
+    particles.forEach((p,i)=>{
+      p.x+=p.vx; p.y+=p.vy; p.life-=p.decay;
+      if(p.life<=0){ particles.splice(i,1); spawnP(); return; }
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(92,154,255,${p.life*.5})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ── INTEL CANVAS ────────────────────────────────────────
+(function(){
+  const c=document.getElementById('intel-canvas');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  let W,H,layers=[];
+
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; init(); }
+
+  function init(){
+    layers=[
+      {nodes:4,x:W*.15},
+      {nodes:6,x:W*.35},
+      {nodes:8,x:W*.55},
+      {nodes:6,x:W*.75},
+      {nodes:3,x:W*.9}
+    ].map(l=>({
+      ...l,
+      ys:Array.from({length:l.nodes},(_,i)=>(i+1)*(H/(l.nodes+1))),
+      pulses:Array.from({length:l.nodes},()=>Math.random()*Math.PI*2)
+    }));
+  }
+
+  let t=0;
+  let activeSignals=[];
+  function spawnSignal(){
+    if(activeSignals.length>20) return;
+    const li=Math.floor(Math.random()*(layers.length-1));
+    const ni=Math.floor(Math.random()*layers[li].nodes);
+    const nj=Math.floor(Math.random()*layers[li+1].nodes);
+    activeSignals.push({
+      li,ni,nj,progress:0,speed:.012+Math.random()*.01
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=.012;
+    if(Math.random()<.15) spawnSignal();
+
+    // Connections
+    for(let li=0;li<layers.length-1;li++){
+      const l1=layers[li], l2=layers[li+1];
+      l1.ys.forEach((y1,ni)=>{
+        l2.ys.forEach((y2,nj)=>{
+          ctx.beginPath();
+          ctx.moveTo(l1.x,y1);
+          ctx.lineTo(l2.x,y2);
+          ctx.strokeStyle='rgba(41,121,255,.05)';
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        });
+      });
+    }
+
+    // Signals
+    activeSignals.forEach((s,si)=>{
+      s.progress+=s.speed;
+      if(s.progress>=1){ activeSignals.splice(si,1); return; }
+      const l1=layers[s.li], l2=layers[s.li+1];
+      const x1=l1.x, y1=l1.ys[s.ni];
+      const x2=l2.x, y2=l2.ys[s.nj];
+      const px=x1+(x2-x1)*s.progress;
+      const py=y1+(y2-y1)*s.progress;
+      ctx.beginPath();
+      ctx.arc(px,py,2.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,212,255,${(1-s.progress)*.8})`;
+      ctx.fill();
+      const trail=ctx.createRadialGradient(px,py,0,px,py,8);
+      trail.addColorStop(0,'rgba(0,212,255,.2)');
+      trail.addColorStop(1,'transparent');
+      ctx.fillStyle=trail;
+      ctx.beginPath();
+      ctx.arc(px,py,8,0,Math.PI*2);
+      ctx.fill();
+    });
+
+    // Nodes
+    layers.forEach(l=>{
+      l.ys.forEach((y,ni)=>{
+        l.pulses[ni]+=.03;
+        const pulse=Math.sin(l.pulses[ni])*.3+.7;
+        ctx.beginPath();
+        ctx.arc(l.x,y,5,0,Math.PI*2);
+        ctx.fillStyle=`rgba(41,121,255,${pulse*.8})`;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(l.x,y,9,0,Math.PI*2);
+        ctx.strokeStyle=`rgba(41,121,255,${pulse*.2})`;
+        ctx.lineWidth=1;
+        ctx.stroke();
+      });
+    });
+
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ── ROBOTICS CANVAS ─────────────────────────────────────
+(function(){
+  const c=document.getElementById('robotics-canvas');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  let W,H;
+
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; }
+
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=.008;
+    const cx=W/2, cy=H/2;
+
+    // Humanoid silhouette
+    const scale=Math.min(W,H)*.0028;
+    const bx=cx, by=cy;
+
+    ctx.save();
+    ctx.translate(bx,by+Math.sin(t*.5)*4);
+    ctx.strokeStyle='rgba(92,154,255,.5)';
+    ctx.lineWidth=1.2;
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+
+    // Head
+    ctx.beginPath();
+    ctx.arc(0,-120*scale,20*scale,0,Math.PI*2);
+    ctx.stroke();
+    // Eyes
+    ctx.beginPath();
+    ctx.arc(-7*scale,-122*scale,3*scale,0,Math.PI*2);
+    ctx.fillStyle=`rgba(0,212,255,${.6+Math.sin(t*4)*.3})`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(7*scale,-122*scale,3*scale,0,Math.PI*2);
+    ctx.fill();
+    // Neck
+    ctx.beginPath();
+    ctx.moveTo(0,-100*scale);ctx.lineTo(0,-90*scale);ctx.stroke();
+    // Torso
+    ctx.beginPath();
+    ctx.moveTo(-30*scale,-90*scale);ctx.lineTo(30*scale,-90*scale);
+    ctx.lineTo(28*scale,20*scale);ctx.lineTo(-28*scale,20*scale);
+    ctx.closePath();ctx.stroke();
+    // Chest detail
+    ctx.beginPath();
+    ctx.arc(0,-45*scale,12*scale,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(0,212,255,${.3+Math.sin(t*2)*.2})`;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0,-45*scale,6*scale,0,Math.PI*2);
+    ctx.fillStyle=`rgba(0,212,255,${.4+Math.sin(t*3)*.2})`;
+    ctx.fill();
+    // L arm
+    const lAng=Math.sin(t)*.15;
+    ctx.strokeStyle='rgba(92,154,255,.5)';
+    ctx.beginPath();
+    ctx.moveTo(-30*scale,-85*scale);
+    ctx.lineTo(-50*scale+Math.sin(lAng)*10,-30*scale+Math.cos(lAng)*10);
+    ctx.lineTo(-55*scale,20*scale);ctx.stroke();
+    // R arm
+    ctx.beginPath();
+    ctx.moveTo(30*scale,-85*scale);
+    ctx.lineTo(50*scale-Math.sin(lAng)*10,-30*scale+Math.cos(lAng)*10);
+    ctx.lineTo(55*scale,20*scale);ctx.stroke();
+    // Hip
+    ctx.beginPath();
+    ctx.moveTo(-28*scale,20*scale);ctx.lineTo(28*scale,20*scale);ctx.stroke();
+    // L leg
+    ctx.beginPath();
+    ctx.moveTo(-16*scale,20*scale);ctx.lineTo(-18*scale,80*scale);ctx.lineTo(-18*scale,130*scale);ctx.stroke();
+    // R leg
+    ctx.beginPath();
+    ctx.moveTo(16*scale,20*scale);ctx.lineTo(18*scale,80*scale);ctx.lineTo(18*scale,130*scale);ctx.stroke();
+    // Feet
+    ctx.beginPath();
+    ctx.moveTo(-28*scale,130*scale);ctx.lineTo(-10*scale,130*scale);ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(10*scale,130*scale);ctx.lineTo(28*scale,130*scale);ctx.stroke();
+
+    ctx.restore();
+
+    // Scan rings around robot
+    for(let i=1;i<=3;i++){
+      const r=80+i*50+Math.sin(t+i)*.5*scale*100;
+      const a=.08-i*.02;
+      ctx.beginPath();
+      ctx.arc(cx,cy,r*scale*2.2,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(21,101,255,${a})`;
+      ctx.lineWidth=.8;
+      ctx.stroke();
+    }
+
+    // Data points
+    for(let i=0;i<8;i++){
+      const ang=t*.3+i*(Math.PI*2/8);
+      const r=200*scale*1.2;
+      const px=cx+Math.cos(ang)*r;
+      const py=cy+Math.sin(ang)*r;
+      ctx.beginPath();
+      ctx.arc(px,py,2,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,212,255,.6)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);ctx.lineTo(px,py);
+      ctx.strokeStyle='rgba(41,121,255,.05)';
+      ctx.lineWidth=.5;ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+// ── FORM ────────────────────────────────────────────────
+function submitForm(btn){
+  btn.textContent='Sent ✓';
+  btn.style.background='#10b981';
+  btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';btn.disabled=false;},4000);
+}
+// ── MODALS ──────────────────────────────────────────────
+function openModal(id){
+  const m = document.getElementById(id);
+  m.classList.add('open');
+  document.body.classList.add('modal-active');
+}
+function closeModal(id){
+  const m = document.getElementById(id);
+  m.classList.remove('open');
+  document.body.classList.remove('modal-active');
+}
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click', e=>{
+    if(e.target === ov) closeModal(ov.id);
+  });
+});
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(m=>closeModal(m.id));
+  }
+});
+</script>
+</body>
+</html>
